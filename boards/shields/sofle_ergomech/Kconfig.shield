@@ -6,3 +6,24 @@ config SHIELD_SOFLE_ERGOMECH_LEFT
 
 config SHIELD_SOFLE_ERGOMECH_RIGHT
     def_bool $(shields_list_contains,sofle_ergomech_right)
+
+# 添加 ZMK Studio 支持配置
+config ZMK_STUDIO
+    bool "Enable ZMK Studio Support"
+    default y
+    depends on SHIELD_SOFLE_ERGOMECH_LEFT || SHIELD_SOFLE_ERGOMECH_RIGHT
+
+config ZMK_STUDIO_RPC
+    bool "Enable RPC for ZMK Studio"
+    default y
+    depends on ZMK_STUDIO
+
+config ZMK_STUDIO_TRANSPORT_UART
+    bool "Enable UART Transport for ZMK Studio"
+    default y
+    depends on ZMK_STUDIO && SERIAL
+
+config ZMK_STUDIO_TRANSPORT_BLE
+    bool "Enable BLE Transport for ZMK Studio"
+    default y
+    depends on ZMK_STUDIO && ZMK_BLE
